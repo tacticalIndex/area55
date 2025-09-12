@@ -6,27 +6,27 @@ export async function handler(event) {
   // Server-side config
   const CONFIGS = {
     eventcommittee: {
-      guildId: "1404264776871182446", // staff server
-      roleId: "1404268041759494204", // event committee
+      guildId: "1359236692116242694", // evc server, SUBJECT TO CHANGE
+      roleId: "null", // event committee, no role yet
       webhook: process.env.DISCORD_WEBHOOK_EVENTCOMMITTEE
     },
     gamemoderationteam: {
-      guildId: "1404264776871182446", // staff server
-      roleId: "1404268039540576358", // game moderation team
+      guildId: "1359233219156906074", // gmt server
+      roleId: "1380846654470623265", // game moderation team
       webhook: process.env.DISCORD_WEBHOOK_GAMEMODERATIONTEAM
     },
     serverstartuphosts: {
-      guildId: "1404264776871182446", // staff server
-      roleId: "1404266962007097354", // server start up hosts
+      guildId: "1414127185895227465", // SSUH Server
+      roleId: "1415905687619506297", // server start up hosts
       webhook: process.env.DISCORD_WEBHOOK_SERVERSTARTUPDEPARTMENT
     },
     actingdepartment: {
-      guildId: "1404264776871182446", // staff server
-      roleId: "1404267939431186532", // acting department
+      guildId: "1338393906374770740", // acting server
+      roleId: "1338444679049379910", // acting department
       webhook: process.env.DISCORD_WEBHOOK_ACTINGDEPARTMENT
     },
     morphingdepartment: {
-      guildId: "1404264776871182446", // staff server
+      guildId: "1404264776871182446", // morphing server
       roleId: "1404268189009055866", // morphing department
       webhook: process.env.DISCORD_WEBHOOK_MORPHINGDEPARTMENT
     }
