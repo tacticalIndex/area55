@@ -413,7 +413,7 @@
         `**Duration:** ${duration}`,
         `**Start Screenshot:** ${slotStart.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
         `**End Screenshot:** ${slotEnd.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
-      ];
+      ].join("/n");
       const text = lines.join('\n');
       navigator.clipboard.writeText(text).then(() => {
         alert('Shift summary copied to clipboard. Do not close this tab yet; you might still need it!');
