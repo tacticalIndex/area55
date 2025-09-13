@@ -431,7 +431,10 @@
     
       // Build Discord payload
       const payload = {
-        content: message,
+        embed: [{
+          title: "Testing Output:",
+          description: message
+        }],
         username: "Shift Tracker Bot"
       };
     
