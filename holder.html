@@ -35,7 +35,7 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35); 
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     .card h2 { margin: 0 0 10px; font-size: 1.1rem; letter-spacing: .3px; }
 
@@ -59,7 +59,7 @@
       font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 2rem; letter-spacing: .5px;
     }
-    .btns { display:flex; gap: 8px; flex-wrap: wrap; }
+    .btns { display:flex; gap: 8px; flex-wrap: wrap; align-items:center; }
     button {
       border: 1px solid var(--border); background: #132030; color: var(--text); padding: 8px 12px; border-radius: 10px; cursor:pointer;
     }
@@ -122,9 +122,9 @@
           <option value="MORPHINGDEPARTMENT">Morphing Department</option>
         </select>
         <textarea id="message" placeholder="(TEMPTESTING) Enter shift log..."></textarea>
-        <div class="btns">
-          <button type="submittemptesting">(TEMP TESTING) Send</button>
-          <label id="status">Status</button>
+        <div class="btns" style="margin-top:8px;">
+          <button type="submit" class="primary">(TEMP TESTING) Send</button>
+          <div id="status" class="stamp" style="margin-left:8px">Status</div>
         </div>
       </form>
 
@@ -229,7 +229,6 @@
     }
     function nowStamp() {
       const d = new Date();
-      // ISO-like without seconds tz: YYYY-MM-DD HH:MM:SS
       const z2 = n => String(n).padStart(2, '0');
       return `${d.getFullYear()}-${z2(d.getMonth()+1)}-${z2(d.getDate())} ${z2(d.getHours())}:${z2(d.getMinutes())}:${z2(d.getSeconds())}`;
     }
@@ -385,7 +384,7 @@
       slot.body.classList.add('empty');
     }
 
-    // Wire buttons
+    // Wire buttons for both slots
     document.querySelector('[data-paste="start"]').addEventListener('click', () => readFromClipboard(slotStart));
     document.querySelector('[data-copyimg="start"]').addEventListener('click', () => copyCanvasImage(slotStart));
     document.querySelector('[data-clear="start"]').addEventListener('click', () => clearSlot(slotStart));
@@ -394,15 +393,16 @@
     document.querySelector('[data-copyimg="end"]').addEventListener('click', () => copyCanvasImage(slotEnd));
     document.querySelector('[data-clear="end"]').addEventListener('click', () => clearSlot(slotEnd));
 
-    // ===================== Copy Summary =====================
-    function copySummary() {
+    // ===================== Shared Shift Log Builder =====================
+    function buildShiftLines() {
       const roblox = document.getElementById('roblox').value.trim();
       const discord = document.getElementById('discord').value.trim();
       const codename = document.getElementById('codename').value.trim();
       const team = document.getElementById('team').value;
-
+      const message = document.getElementById('message').value.trim();
       const duration = timeEl.textContent;
-      const lines = [
+
+      return [
         `**__SCP:RP Shift Log__**`,
         `**Roblox:** ${roblox || '—'}`,
         `**Discord:** ${discord || '—'}`,
@@ -411,54 +411,60 @@
         `**Start:** ${startStamp || '—'}`,
         `**End:** ${endStamp || '—'}`,
         `**Duration:** ${duration}`,
+        `**Log:** ${message || '—'}`,
         `**Start Screenshot:** ${slotStart.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
         `**End Screenshot:** ${slotEnd.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
       ];
-      const text = lines.join('\n');
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Shift summary copied to clipboard. Do not close this tab yet; you might still need it!');
-      }).catch(() => alert('Copy failed.'));
+    }
+
+    // ===================== Copy Summary (text) =====================
+    async function copySummary() {
+      const text = buildShiftLines().join('\n');
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Shift summary copied to clipboard.');
+      } catch (e) {
+        alert('Copy failed.');
+      }
     }
     document.getElementById('copySummary').addEventListener('click', copySummary);
 
-    // TEMP PLACEHOLDER START
+    // ===================== Submit handler (uses same builder) =====================
     document.getElementById("shift-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-    
+
       const team = document.getElementById("team").value;
-      const message = document.getElementById("message").value;
       const statusDiv = document.getElementById("status");
-    
-      // Build Discord payload
+
+      const description = buildShiftLines().join('\n');
       const payload = {
         embeds: [{
-          title: "Testing Output:",
-          description: lines
+          title: "Shift Report",
+          description: description
         }],
         username: "Shift Tracker Bot"
       };
-    
+
       try {
         const response = await fetch("/.netlify/functions/proxy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ team, payload })
         });
-    
+
         if (response.ok) {
           statusDiv.textContent = "✅ Message sent!";
-          statusDiv.style.color = "green";
+          statusDiv.style.color = "lightgreen";
         } else {
           const err = await response.text();
           statusDiv.textContent = `❌ Error: ${err}`;
-          statusDiv.style.color = "red";
+          statusDiv.style.color = "salmon";
         }
       } catch (error) {
         statusDiv.textContent = `⚠️ Failed: ${error.message}`;
-        statusDiv.style.color = "red";
+        statusDiv.style.color = "salmon";
       }
     });
-    // TEMP PLACEHOLDER END
   </script>
 </body>
 </html>
