@@ -431,12 +431,15 @@
     
       // Build Discord payload
       const payload = {
-        embeds: [{
-          title: "Testing Output:",
-          description: lines
-        }],
-        username: "Shift Tracker Bot"
-      };
+    		embeds: [
+      {
+        title: "Shift Log",
+        description: lines,
+        color: 3066993, // Optional: Embed color in decimal
+      		},
+    		],
+    		username: "Shift Tracker Bot", // Optional: Webhook username
+  		};
     
       try {
         const response = await fetch("/.netlify/functions/proxy", {
