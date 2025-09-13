@@ -399,7 +399,6 @@
       const discord = document.getElementById('discord').value.trim();
       const codename = document.getElementById('codename').value.trim();
       const team = document.getElementById('team').value;
-      const message = document.getElementById('message').value.trim();
       const duration = timeEl.textContent;
 
       return [
@@ -411,7 +410,6 @@
         `**Start:** ${startStamp || '—'}`,
         `**End:** ${endStamp || '—'}`,
         `**Duration:** ${duration}`,
-        `**Log:** ${message || '—'}`,
         `**Start Screenshot:** ${slotStart.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
         `**End Screenshot:** ${slotEnd.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
       ];
