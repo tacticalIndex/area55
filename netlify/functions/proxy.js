@@ -1,55 +1,64 @@
-// proxy.js
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+  let body;
   try {
-    const { team, payload, startImage, endImage } = JSON.parse(event.body);
+    body = JSON.parse(event.body);
+  } catch {
+    return { statusCode: 400, body: "Invalid JSON" };
+  }
 
-    // Cloudinary setup
-    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-    const apiKey = process.env.CLOUDINARY_API_KEY;
-    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+  const { team, payload, startImage, endImage } = body;
 
-    async function uploadBase64(base64, filename) {
-      if (!base64) return null;
+  const webhookMap = {
+    SERVERSTARTUPDEPARTMENT: process.env.DISCORD_WEBHOOK_SERVERSTARTUPDEPARTMENT,
+    GAMEMODERATIONTEAM: process.env.DISCORD_WEBHOOK_GAMEMODERATIONTEAM,
+    ACTINGDEPARTMENT: process.env.DISCORD_WEBHOOK_ACTINGDEPARTMENT,
+    EVENTCOMMITTEE: process.env.DISCORD_WEBHOOK_EVENTCOMMITTEE,
+    MORPHINGDEPARTMENT: process.env.DISCORD_WEBHOOK_MORPHINGDEPARTMENT
+  };
 
-      const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
-      const formData = new FormData();
-      formData.append("file", `data:image/png;base64,${base64}`);
-      formData.append("upload_preset", "shift_manager"); // Must create in Cloudinary
-      formData.append("public_id", filename);
+  const webhookUrl = webhookMap[team];
+  if (!webhookUrl) return { statusCode: 400, body: "Unknown team" };
 
-      const resp = await fetch(url, { method: "POST", body: formData });
-      const data = await resp.json();
-      if (!resp.ok) throw new Error(data.error?.message || "Cloudinary upload failed");
-      return data.secure_url;
-    }
+  async function uploadToCloudinary(base64, public_id_suffix) {
+    if (!base64) return null;
+    const form = new FormData();
+    form.append("file", `data:image/png;base64,${base64}`);
+    form.append("upload_preset", "shift_manager");
+    if (public_id_suffix) form.append("public_id", public_id_suffix);
 
-    // Upload images
-    const startUrl = await uploadBase64(startImage, `start_${Date.now()}`);
-    const endUrl = await uploadBase64(endImage, `end_${Date.now()}`);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`, {
+      method: "POST",
+      body: form
+    });
 
-    // Append image URLs to description
-    if (startUrl) payload.embeds[0].description += `\n**Start Screenshot:** ${startUrl}`;
-    if (endUrl) payload.embeds[0].description += `\n**End Screenshot:** ${endUrl}`;
+    const data = await res.json();
+    return data.secure_url || null;
+  }
 
-    // Send Discord webhook
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-    const webhookResp = await fetch(webhookUrl, {
+  try {
+    const startLink = await uploadToCloudinary(startImage, `shift_start_${Date.now()}`);
+    const endLink = await uploadToCloudinary(endImage, `shift_end_${Date.now()}`);
+
+    if (startLink) payload.embeds[0].description += `\n**Start Screenshot:** ${startLink}`;
+    if (endLink) payload.embeds[0].description += `\n**End Screenshot:** ${endLink}`;
+
+    const discordRes = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
 
-    if (!webhookResp.ok) {
-      const text = await webhookResp.text();
-      throw new Error(text);
+    if (!discordRes.ok) {
+      const text = await discordRes.text();
+      return { statusCode: 500, body: `Discord error: ${text}` };
     }
 
-    return { statusCode: 200, body: "Webhook sent!" };
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return { statusCode: 500, body: `Server error: ${err.message}` };
   }
 }
