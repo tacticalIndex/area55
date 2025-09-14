@@ -16,18 +16,42 @@
       --warn: #e3b341;
       --border: #263041;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 24px; font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text); background: radial-gradient(1200px 800px at 10% 0%, #0d141c 0, var(--bg) 50%);
-    }
-    header { text-align: center; margin-bottom: 16px; }
-    h1 { margin: 0 0 6px; font-weight: 800; letter-spacing: 0.5px; }
-    .sub { color: var(--muted); font-size: 0.95rem; }
 
-    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 1000px; margin: 0 auto; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% 0%, #0d141c 0, var(--bg) 50%);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     @media (min-width: 920px) {
-      .grid { grid-template-columns: 1.1fr 0.9fr; }
+      .grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
     }
 
     .card {
@@ -35,78 +59,200 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
-    .card h2 { margin: 0 0 10px; font-size: 1.1rem; letter-spacing: .3px; }
 
-    label { display:block; font-size: 0.9rem; color: var(--muted); margin: 10px 0 6px; }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      letter-spacing: .3px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 10px 0 6px;
+    }
+
     input, select, textarea {
       width: 100%;
-      padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
-      background: #0e1520; color: var(--text);
-      outline: none; transition: border .15s ease;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0e1520;
+      color: var(--text);
+      outline: none;
+      transition: border .15s ease;
     }
-    input:focus, select:focus, textarea:focus { border-color: #3b82f6; }
 
-    .row { display:flex; gap: 10px; }
-    .row > * { flex: 1; }
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row > * {
+      flex: 1;
+    }
 
     .timer {
-      display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap;
-      background: #0e141d; border: 1px solid var(--border); border-radius: 12px; padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #0e141d;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
     }
-    .time {
-      font-variant-numeric: tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 2rem; letter-spacing: .5px;
-    }
-    .btns { display:flex; gap: 8px; flex-wrap: wrap; align-items:center; }
-    button {
-      border: 1px solid var(--border); background: #132030; color: var(--text); padding: 8px 12px; border-radius: 10px; cursor:pointer;
-    }
-    button.primary { background: #17314b; border-color: #25496b; }
-    button.success { background: #12321f; border-color: #225f39; }
-    button.warn { background: #3a2c12; border-color: #72581d; }
-    button.danger { background: #3b161a; border-color: #6a272d; }
-    button:disabled { opacity:.6; cursor:not-allowed; }
 
-    .stamp { font-size:.9rem; color:var(--muted); }
+    .time {
+      font-variant-numeric: tabular-nums;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 2rem;
+      letter-spacing: .5px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button {
+      border: 1px solid var(--border);
+      background: #132030;
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: #17314b;
+      border-color: #25496b;
+    }
+
+    button.success {
+      background: #12321f;
+      border-color: #225f39;
+    }
+
+    button.warn {
+      background: #3a2c12;
+      border-color: #72581d;
+    }
+
+    button.danger {
+      background: #3b161a;
+      border-color: #6a272d;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .stamp {
+      font-size: .9rem;
+      color: var(--muted);
+    }
 
     .paste-slot {
-      border: 1px dashed #3a4a63; border-radius: 12px; padding: 12px; background: #0c121a; position: relative;
+      border: 1px dashed #3a4a63;
+      border-radius: 12px;
+      padding: 12px;
+      background: #0c121a;
+      position: relative;
     }
-    .slot-head { display:flex; align-items:center; justify-content:space-between; gap: 8px; margin-bottom: 8px; }
-    .slot-title { font-weight: 700; }
-    .slot-actions { display:flex; gap: 8px; }
-    .slot-body { display:flex; align-items:center; justify-content:center; min-height: 180px; background:#0b1118; border-radius: 10px; overflow:hidden; }
+
+    .slot-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .slot-title {
+      font-weight: 700;
+    }
+
+    .slot-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slot-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      background: #0b1118;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
     .slot-body.empty::after {
       content: 'Click this area, then press Ctrl+V to paste a screenshot OR use Paste button';
-      color: #7b8796; font-size: .95rem; text-align:center; padding: 12px; max-width: 460px;
+      color: #7b8796;
+      font-size: .95rem;
+      text-align: center;
+      padding: 12px;
+      max-width: 460px;
     }
-    canvas { max-width: 100%; height: auto; display:block; }
 
-    .footer { text-align:center; color:var(--muted); margin-top: 20px; font-size:.9rem; }
+    canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
-    .bar { height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 999px; margin: 10px 0 16px; opacity:.5; }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 20px;
+      font-size: .9rem;
+    }
 
-    .note { background:#131a25; border:1px solid var(--border); border-radius: 10px; padding:10px; color: var(--muted); font-size:.9rem; }
+    .bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 999px;
+      margin: 10px 0 16px;
+      opacity: .5;
+    }
+
+    .note {
+      background: #131a25;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
   </style>
 </head>
 <body>
+  <!-- header -->
   <header>
     <h1>In-Game Staff Shift Tracker</h1>
-    <div class="">Created by tactical_index for the SCP: Roleplay custom server Area-55<br><i>[PROTOTYPE] Do not actively leak the URL to this website (even though it's open-source). Sending teasers/screenshots is permitted.</i></div>
+    <div>Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
   </header>
 
   <div class="grid">
-    <!-- Left: Form + Stopwatch -->
+    <!-- Left side -->
     <section class="card">
       <h2>Staff Details</h2>
       <div class="bar"></div>
+
       <label>Roblox Username</label>
       <input id="roblox" placeholder="Exact Roblox username" />
 
       <label>Discord Username</label>
-      <input id="discord" placeholder="e.g. user#0001 or @user" />
+      <input id="discord" placeholder="e.g. user#0001" />
 
       <label>Staff Codename</label>
       <input id="codename" placeholder="e.g. 'User'" />
@@ -121,20 +267,22 @@
           <option value="EVENTCOMMITTEE">Event Committee</option>
           <option value="MORPHINGDEPARTMENT">Morphing Department</option>
         </select>
+
         <div class="btns" style="margin-top:8px;">
           <button type="submit" class="primary">Send</button>
           <label id="status">Status</label>
         </div>
       </form>
 
-      <div style="height:12px"></div>
       <h2>Stopwatch</h2>
       <div class="bar"></div>
+
       <div class="timer">
         <div>
           <div class="time" id="time">00:00:00</div>
           <div class="stamp" id="stamps">Start: — · End: —</div>
         </div>
+
         <div class="btns">
           <button id="startBtn" class="primary">Start</button>
           <button id="pauseBtn" class="warn" disabled>Pause</button>
@@ -143,33 +291,18 @@
           <button id="resetBtn" class="danger" disabled>Reset</button>
         </div>
       </div>
-
-      <div class="note" style="margin-top:10px">
-        • Start sets the official start time. Pause/Resume doesn’t change it. End Shift records the end time.<br />
-        • Nothing is uploaded or saved; please ensure you do not accidentally reload your tab - your recorded data will not be saved.<br />
-        • Screenshot(s) are not setup as of now, if at anytime you dont see this part, assume that it is working.
-      </div>
-
-      <div style="height:12px"></div>
-      <h2>Export</h2>
-      <div class="bar"></div>
-      <div class="row">
-        <button id="copySummary" class="primary">Copy Shift Summary (text)</button>
-      </div>
     </section>
 
-    <!-- Right: Screenshots -->
+    <!-- Right side -->
     <section class="card">
       <h2>Shift Screenshots</h2>
       <div class="bar"></div>
 
-      <!-- Start Screenshot Slot -->
       <div class="paste-slot" id="slotStart">
         <div class="slot-head">
-          <div class="slot-title">Start of Shift Screenshot</div>
+          <div class="slot-title">Start Screenshot</div>
           <div class="slot-actions">
             <button data-paste="start">Paste</button>
-            <button data-copyimg="start">Copy Image</button>
             <button data-clear="start">Clear</button>
           </div>
         </div>
@@ -178,15 +311,11 @@
         </div>
       </div>
 
-      <div style="height:12px"></div>
-
-      <!-- End Screenshot Slot -->
-      <div class="paste-slot" id="slotEnd">
+      <div class="paste-slot" id="slotEnd" style="margin-top:12px;">
         <div class="slot-head">
-          <div class="slot-title">End of Shift Screenshot</div>
+          <div class="slot-title">End Screenshot</div>
           <div class="slot-actions">
             <button data-paste="end">Paste</button>
-            <button data-copyimg="end">Copy Image</button>
             <button data-clear="end">Clear</button>
           </div>
         </div>
@@ -194,247 +323,165 @@
           <canvas id="canvasEnd"></canvas>
         </div>
       </div>
-
-      <div class="note" style="margin-top:12px">
-        Instructions: Click a slot then press <strong>Ctrl+V</strong> to paste from your clipboard, or, use the <em>Paste</em> button (requires browser permission).
-      </div>
     </section>
   </div>
 
-  <div class="footer">Created by <b>tactical_index</b> for Area-55 | This project is open-source, as of now</div>
+  <div class="footer">
+    Created by <b>tactical_index</b> | Open-source
+  </div>
 
   <script>
-    // ===================== Stopwatch Logic =====================
-    const timeEl = document.getElementById('time');
-    const stampsEl = document.getElementById('stamps');
-    const startBtn = document.getElementById('startBtn');
-    const pauseBtn = document.getElementById('pauseBtn');
-    const resumeBtn = document.getElementById('resumeBtn');
-    const endBtn = document.getElementById('endBtn');
-    const resetBtn = document.getElementById('resetBtn');
+    // stopwatch
+    let startTime, timerInterval;
+    const timeEl = document.getElementById("time");
+    const stampsEl = document.getElementById("stamps");
 
-    let startEpoch = null; // ms timestamp when started
-    let elapsed = 0;       // accumulated ms when paused
-    let running = false;
-    let tick = null;
-    let startStamp = null; // string time start
-    let endStamp = null;   // string time end
-
-    function fmt(ms) {
-      const total = Math.floor(ms / 1000);
-      const h = String(Math.floor(total / 3600)).padStart(2, '0');
-      const m = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
-      const s = String(total % 60).padStart(2, '0');
-      return `${h}:${m}:${s}`;
-    }
-    function nowStamp() {
-      const d = new Date();
-      const z2 = n => String(n).padStart(2, '0');
-      return `${d.getFullYear()}-${z2(d.getMonth()+1)}-${z2(d.getDate())} ${z2(d.getHours())}:${z2(d.getMinutes())}:${z2(d.getSeconds())}`;
+    function updateTime() {
+      const elapsed = Date.now() - startTime;
+      const hrs = String(Math.floor(elapsed / 3600000)).padStart(2, "0");
+      const mins = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, "0");
+      const secs = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, "0");
+      timeEl.textContent = `${hrs}:${mins}:${secs}`;
     }
 
-    function render() {
-      const cur = running ? (Date.now() - startEpoch + elapsed) : elapsed;
-      timeEl.textContent = fmt(cur);
-      stampsEl.textContent = `Start: ${startStamp || '—'} · End: ${endStamp || '—'}`;
-    }
-
-    function setButtons(state) {
-      // states: idle, running, paused, ended
-      startBtn.disabled = !(state === 'idle');
-      pauseBtn.disabled = !(state === 'running');
-      resumeBtn.disabled = !(state === 'paused');
-      endBtn.disabled = !(state === 'running' || state === 'paused');
-      resetBtn.disabled = !(state === 'paused' || state === 'ended');
-    }
-
-    function start() {
-      if (running) return;
-      if (!startStamp) startStamp = nowStamp();
-      startEpoch = Date.now();
-      running = true;
-      tick = setInterval(render, 250);
-      setButtons('running');
-      render();
-    }
-    function pause() {
-      if (!running) return;
-      running = false;
-      clearInterval(tick);
-      elapsed += Date.now() - startEpoch;
-      setButtons('paused');
-      render();
-    }
-    function resume() { start(); }
-    function endShift() {
-      if (running) { pause(); }
-      if (!endStamp) endStamp = nowStamp();
-      setButtons('ended');
-      render();
-    }
-    function reset() {
-      clearInterval(tick);
-      startEpoch = null; elapsed = 0; running = false; startStamp = null; endStamp = null;
-      timeEl.textContent = '00:00:00';
-      setButtons('idle');
-      render();
-    }
-
-    startBtn.addEventListener('click', start);
-    pauseBtn.addEventListener('click', pause);
-    resumeBtn.addEventListener('click', resume);
-    endBtn.addEventListener('click', endShift);
-    resetBtn.addEventListener('click', reset);
-    setButtons('idle');
-    render();
-
-    // ===================== Paste Slots (Canvas) =====================
-    const slotStart = {
-      canvas: document.getElementById('canvasStart'),
-      body: document.querySelector('#slotStart .slot-body'),
-      blob: null,
-    };
-    const slotEnd = {
-      canvas: document.getElementById('canvasEnd'),
-      body: document.querySelector('#slotEnd .slot-body'),
-      blob: null,
+    document.getElementById("startBtn").onclick = () => {
+      startTime = Date.now();
+      timerInterval = setInterval(updateTime, 1000);
+      stampsEl.textContent = `Start: ${new Date().toLocaleTimeString()} · End: —`;
+      toggleButtons("start");
     };
 
-    let activeSlot = null; // which slot receives Ctrl+V
+    document.getElementById("pauseBtn").onclick = () => {
+      clearInterval(timerInterval);
+      toggleButtons("pause");
+    };
 
-    function drawBlobToCanvas(slot, blob) {
-      const img = new Image();
-      img.onload = () => {
-        const maxW = 1000; // limit to keep memory sane
-        const scale = Math.min(1, maxW / img.width);
-        const w = Math.round(img.width * scale);
-        const h = Math.round(img.height * scale);
-        slot.canvas.width = w; slot.canvas.height = h;
-        const ctx = slot.canvas.getContext('2d');
-        ctx.clearRect(0,0,w,h);
-        ctx.drawImage(img, 0, 0, w, h);
-        slot.body.classList.remove('empty');
-      };
-      img.src = URL.createObjectURL(blob);
-      slot.blob = blob;
+    document.getElementById("resumeBtn").onclick = () => {
+      startTime = Date.now() - (parseInt(timeEl.textContent.split(":")[0]) * 3600000 +
+        parseInt(timeEl.textContent.split(":")[1]) * 60000 +
+        parseInt(timeEl.textContent.split(":")[2]) * 1000);
+      timerInterval = setInterval(updateTime, 1000);
+      toggleButtons("resume");
+    };
+
+    document.getElementById("endBtn").onclick = () => {
+      clearInterval(timerInterval);
+      stampsEl.textContent = stampsEl.textContent.replace("End: —", `End: ${new Date().toLocaleTimeString()}`);
+      toggleButtons("end");
+    };
+
+    document.getElementById("resetBtn").onclick = () => {
+      clearInterval(timerInterval);
+      timeEl.textContent = "00:00:00";
+      stampsEl.textContent = "Start: — · End: —";
+      toggleButtons("reset");
+    };
+
+    function toggleButtons(state) {
+      document.getElementById("startBtn").disabled = state !== "reset";
+      document.getElementById("pauseBtn").disabled = state !== "start" && state !== "resume";
+      document.getElementById("resumeBtn").disabled = state !== "pause";
+      document.getElementById("endBtn").disabled = state === "reset";
+      document.getElementById("resetBtn").disabled = state === "reset";
     }
 
-    function handlePasteEvent(e) {
-      if (!activeSlot) return;
-      const items = e.clipboardData && e.clipboardData.items;
-      if (!items) return;
-      for (const it of items) {
-        if (it.type.startsWith('image/')) {
-          const blob = it.getAsFile();
-          if (blob) { drawBlobToCanvas(activeSlot, blob); e.preventDefault(); return; }
+    // screenshot paste slots
+    const slotStart = { canvas: document.getElementById("canvasStart"), blob: null };
+    const slotEnd = { canvas: document.getElementById("canvasEnd"), blob: null };
+
+    function handlePaste(e, slot) {
+      const items = e.clipboardData.items;
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          const ctx = slot.canvas.getContext("2d");
+          const img = new Image();
+          img.onload = () => {
+            slot.canvas.width = img.width;
+            slot.canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            slot.blob = file;
+            slot.canvas.parentElement.classList.remove("empty");
+          };
+          img.src = URL.createObjectURL(file);
         }
       }
     }
-    document.addEventListener('paste', handlePasteEvent);
 
-    // Clicking on a slot arms it for Ctrl+V
-    slotStart.body.addEventListener('click', () => { activeSlot = slotStart; slotStart.body.focus(); });
-    slotEnd.body.addEventListener('click',   () => { activeSlot = slotEnd;   slotEnd.body.focus();   });
+    document.querySelectorAll(".slot-body").forEach((el, idx) => {
+      el.addEventListener("paste", (e) => {
+        handlePaste(e, idx === 0 ? slotStart : slotEnd);
+      });
+    });
 
-    // Paste buttons using async Clipboard API (works on https)
-    async function readFromClipboard(toSlot) {
-      try {
-        if (!navigator.clipboard || !navigator.clipboard.read) throw new Error('Clipboard read not supported');
-        const items = await navigator.clipboard.read();
-        for (const item of items) {
-          for (const type of item.types) {
-            if (type.startsWith('image/')) {
-              const blob = await item.getType(type);
-              drawBlobToCanvas(toSlot, blob);
-              return;
+    document.querySelectorAll("[data-paste]").forEach((btn) => {
+      btn.onclick = async () => {
+        try {
+          const clipboardItems = await navigator.clipboard.read();
+          for (const item of clipboardItems) {
+            if (item.types.includes("image/png")) {
+              const blob = await item.getType("image/png");
+              const slot = btn.dataset.paste === "start" ? slotStart : slotEnd;
+              const ctx = slot.canvas.getContext("2d");
+              const img = new Image();
+              img.onload = () => {
+                slot.canvas.width = img.width;
+                slot.canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                slot.blob = blob;
+                slot.canvas.parentElement.classList.remove("empty");
+              };
+              img.src = URL.createObjectURL(blob);
             }
           }
+        } catch {
+          alert("Clipboard paste failed");
         }
-        alert('Clipboard has no image. Use Ctrl+V after copying a screenshot.');
-      } catch (err) {
-        alert('Browser blocked image paste via button. Click the slot and press Ctrl+V instead.');
-        console.warn(err);
-      }
-    }
+      };
+    });
 
-    // Copy image buttons using ClipboardItem
-    async function copyCanvasImage(slot) {
-      if (!slot.blob) { alert('No image to copy yet. Paste one first.'); return; }
-      try {
-        if (!navigator.clipboard || !window.ClipboardItem) throw new Error('Clipboard write not supported');
-        const type = slot.blob.type || 'image/png';
-        const item = new ClipboardItem({ [type]: slot.blob });
-        await navigator.clipboard.write([item]);
-        alert('Image copied to clipboard.');
-      } catch (err) {
-        try {
-          const dataUrl = slot.canvas.toDataURL('image/png');
-          await navigator.clipboard.writeText(dataUrl);
-          alert('Browser blocked direct image copy. Copied a data-URL instead.');
-        } catch (e2) {
-          alert('Copy failed. Your browser may not allow copying images here.');
-        }
-      }
-    }
+    document.querySelectorAll("[data-clear]").forEach((btn) => {
+      btn.onclick = () => {
+        const slot = btn.dataset.clear === "start" ? slotStart : slotEnd;
+        const ctx = slot.canvas.getContext("2d");
+        ctx.clearRect(0, 0, slot.canvas.width, slot.canvas.height);
+        slot.blob = null;
+        slot.canvas.parentElement.classList.add("empty");
+      };
+    });
 
-    function clearSlot(slot) {
-      slot.blob = null;
-      const ctx = slot.canvas.getContext('2d');
-      ctx.clearRect(0,0,slot.canvas.width, slot.canvas.height);
-      slot.body.classList.add('empty');
-    }
-
-    // Wire buttons for both slots
-    document.querySelector('[data-paste="start"]').addEventListener('click', () => readFromClipboard(slotStart));
-    document.querySelector('[data-copyimg="start"]').addEventListener('click', () => copyCanvasImage(slotStart));
-    document.querySelector('[data-clear="start"]').addEventListener('click', () => clearSlot(slotStart));
-
-    document.querySelector('[data-paste="end"]').addEventListener('click', () => readFromClipboard(slotEnd));
-    document.querySelector('[data-copyimg="end"]').addEventListener('click', () => copyCanvasImage(slotEnd));
-    document.querySelector('[data-clear="end"]').addEventListener('click', () => clearSlot(slotEnd));
-
-    // ===================== Shared Shift Log Builder =====================
+    // build shift lines
     function buildShiftLines() {
-      const roblox = document.getElementById('roblox').value.trim();
-      const discord = document.getElementById('discord').value.trim();
-      const codename = document.getElementById('codename').value.trim();
-      const team = document.getElementById('team').value;
-      const duration = timeEl.textContent;
+      const roblox = document.getElementById("roblox").value || "—";
+      const discord = document.getElementById("discord").value || "—";
+      const codename = document.getElementById("codename").value || "—";
+      const stamps = stampsEl.textContent;
 
       return [
-        `**__SCP:RP Shift Log__**`,
-        `**Roblox:** ${roblox || '—'}`,
-        `**Discord:** ${discord || '—'}`,
-        `**Codename:** ${codename || '—'}`,
-        `**Team:** ${team}`,
-        `**Start:** ${startStamp || '—'}`,
-        `**End:** ${endStamp || '—'}`,
-        `**Duration:** ${duration}`,
-        `**Start Screenshot:** ${slotStart.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
-        `**End Screenshot:** ${slotEnd.blob ? '(`Use the Copy Image button to get your screenshot!`)' : '—'}`,
+        `**Roblox:** ${roblox}`,
+        `**Discord:** ${discord}`,
+        `**Codename:** ${codename}`,
+        `**Shift:** ${stamps}`,
       ];
     }
 
-    // ===================== Copy Summary (text) =====================
-    async function copySummary() {
-      const text = buildShiftLines().join('\n');
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('Shift summary copied to clipboard.');
-      } catch (e) {
-        alert('Copy failed.');
-      }
+    function getBase64FromCanvas(slot) {
+      if (!slot.blob) return null;
+      return slot.canvas.toDataURL("image/png").split(",")[1];
     }
-    document.getElementById('copySummary').addEventListener('click', copySummary);
 
-    // ===================== Submit handler (uses same builder) =====================
+    // submit handler
     document.getElementById("shift-form").addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const team = document.getElementById("team").value;
       const statusDiv = document.getElementById("status");
+      const sendBtn = e.target.querySelector("button[type=submit]");
 
-      const description = buildShiftLines().join('\n');
+      sendBtn.disabled = true;
+      sendBtn.textContent = "Sending...";
+
+      const description = buildShiftLines().join("\n");
       const payload = {
         embeds: [{
           title: "Shift Report",
@@ -443,11 +490,18 @@
         username: "Shift Tracker Bot"
       };
 
+      const body = {
+        team,
+        payload,
+        startImage: getBase64FromCanvas(slotStart),
+        endImage: getBase64FromCanvas(slotEnd)
+      };
+
       try {
         const response = await fetch("/.netlify/functions/proxy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ team, payload })
+          body: JSON.stringify(body)
         });
 
         if (response.ok) {
@@ -462,6 +516,9 @@
         statusDiv.textContent = `⚠️ Failed: ${error.message}`;
         statusDiv.style.color = "salmon";
       }
+
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send";
     });
   </script>
 </body>
