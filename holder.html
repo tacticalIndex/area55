@@ -433,6 +433,11 @@
 
       const team = document.getElementById("team").value;
       const statusDiv = document.getElementById("status");
+      const sendBtn = e.target.querySelector("button[type=submit]");
+      
+      //disable the button for cooldown
+			sendBtn.disabled = true;
+      sendBtn.textContent = "Sending. . .";
 
       const description = buildShiftLines().join('\n');
       const payload = {
@@ -461,6 +466,21 @@
       } catch (error) {
         statusDiv.textContent = `⚠️ Failed: ${error.message}`;
         statusDiv.style.color = "salmon";
+      }
+      //cooldown
+      let cooldown = 15;
+      const originalText = "Send"
+      sendBtn.textContent = `Cooldown ${cooldown}s`;
+      
+      const timer = setInterval(() => {
+        cooldown--;
+        if (cooldown > 0) {
+          sendBtn.textContent = `Cooldown ${cooldown}s`;
+        } else {
+          clearInterval(timer);
+          sendBtn.disabled = false;
+          sendBtn.textContent = originalText;
+        }
       }
     });
   </script>
