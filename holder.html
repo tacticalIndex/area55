@@ -146,8 +146,8 @@
 
       <div class="note" style="margin-top:10px">
         • Start sets the official start time. Pause/Resume doesn’t change it. End Shift records the end time.<br />
-        • Nothing is uploaded or saved; please ensure you do not accidentally reload your tab - your recorded data will not be saved.
-        • Proof(s) are not setup as of now, if at anytime you dont see this part, this will mean it has been fixed.
+        • Nothing is uploaded or saved; please ensure you do not accidentally reload your tab - your recorded data will not be saved.<br />
+        • Screenshot(s) are not setup as of now, if at anytime you dont see this part, assume that it is working.
       </div>
 
       <div style="height:12px"></div>
@@ -433,11 +433,6 @@
 
       const team = document.getElementById("team").value;
       const statusDiv = document.getElementById("status");
-      const sendBtn = e.target.querySelector("button[type=submit]");
-      
-      //disable the button for cooldown
-			sendBtn.disabled = true;
-      sendBtn.textContent = "Sending. . .";
 
       const description = buildShiftLines().join('\n');
       const payload = {
@@ -466,21 +461,6 @@
       } catch (error) {
         statusDiv.textContent = `⚠️ Failed: ${error.message}`;
         statusDiv.style.color = "salmon";
-      }
-      //cooldown
-      let cooldown = 15;
-      const originalText = "Send";
-      sendBtn.textContent = `Cooldown ${cooldown}s`;
-      
-      const timer = setInterval(() => {
-        cooldown--;
-        if (cooldown > 0) {
-          sendBtn.textContent = `Cooldown ${cooldown}s`;
-        } else {
-          clearInterval(timer);
-          sendBtn.disabled = false;
-          sendBtn.textContent = originalText;
-        }
       }
     });
   </script>
