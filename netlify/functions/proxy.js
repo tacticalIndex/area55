@@ -1,4 +1,5 @@
-// contact me on discord (@choppovm) if I leaked any secret keys/webhooks (silly me!)
+import fetch from "node-fetch";
+
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return {
@@ -8,84 +9,109 @@ export async function handler(event) {
   }
 
   try {
-    const { team, payload, startImage, endImage } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const { team, payload, startImage, endImage } = body;
 
-    // Map team names to environment variables (Discord webhooks)
+    // Retrieve Cloudinary credentials from environment
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    const apiKey    = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+    if (!cloudName || !apiKey || !apiSecret) {
+      throw new Error("Cloudinary credentials not set");
+    }
+
+    // Function to upload base64 image to Cloudinary
+    async function uploadToCloudinary(base64, public_id_suffix) {
+      const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      const timestamp = Math.floor(Date.now() / 1000);
+      const payloadData = {
+        file: `data:image/png;base64,${base64}`,
+        upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET, 
+        // if using unsigned preset; or use signature for signed uploads
+        // If signed: you compute signature of params + api_secret
+        // but for simplicity, using an unsigned preset
+        public_id: `scp_shift_${public_id_suffix}_${timestamp}`
+      };
+
+      const res = await fetch(url, {
+        method: "POST",
+        body: new URLSearchParams(payloadData)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error?.message || "Cloudinary upload failed");
+      }
+
+      return data.secure_url;  
+    }
+
+    // Upload start / end if provided
+    let startLink = null;
+    let endLink = null;
+
+    if (startImage) {
+      startLink = await uploadToCloudinary(startImage, "start");
+    }
+
+    if (endImage) {
+      endLink = await uploadToCloudinary(endImage, "end");
+    }
+
+    // Add image links into embed
+    // You can add them in the description or fields
+    if (!payload.embeds) {
+      payload.embeds = [];
+    }
+    // If embed[0] exists, attach links
+    if (payload.embeds[0]) {
+      if (startLink) {
+        payload.embeds[0].description += `\n**Start Screenshot:** ${startLink}`;
+      }
+      if (endLink) {
+        payload.embeds[0].description += `\n**End Screenshot:** ${endLink}`;
+      }
+    }
+
+    // Map teams to Discord webhook URLs
     const webhookMap = {
-      // O5COUNCIL: process.env.DISCORD_WEBHOOK_O5COUNCIL, // not compatible as of now
-      // FACTIONSHUBSTAFF: process.env.DISCORD_WEBHOOK_FACTIONSHUBSTAFF, // not compatible as of now
       SERVERSTARTUPDEPARTMENT: process.env.DISCORD_WEBHOOK_SERVERSTARTUPDEPARTMENT,
-      // DEVELOPMENTTEAM: process.env.DISCORD_WEBHOOK_DEVELOPMENTTEAM, // not compatible as of now
-      // DISCORDMODERATIONTEAM: process.env.DISCORD_WEBHOOK_DISCORDMODERATIONTEAM, // not compatible as of now
       GAMEMODERATIONTEAM: process.env.DISCORD_WEBHOOK_GAMEMODERATIONTEAM,
-      // LOREDEPARTMENT: process.env.DISCORD_WEBHOOK_LOREDEPARTMENT, // not compatible as of now
       ACTINGDEPARTMENT: process.env.DISCORD_WEBHOOK_ACTINGDEPARTMENT,
       EVENTCOMMITTEE: process.env.DISCORD_WEBHOOK_EVENTCOMMITTEE,
       MORPHINGDEPARTMENT: process.env.DISCORD_WEBHOOK_MORPHINGDEPARTMENT
-      // APPEALSANDREPORTSTEAM: process.env.DISCORD_WEBHOOK_APPEALSANDREPORTSTEAM // not compatible as of now
     };
 
     const webhookUrl = webhookMap[team];
+
     if (!webhookUrl) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: "Invalid team" })
+        body: JSON.stringify({ error: "Invalid team selected" })
       };
     }
 
-    // Upload helper → Imgur
-    async function uploadToImgur(base64) {
-      const response = await fetch("https://api.imgur.com/3/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ image: base64 })
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data?.data?.error || "Imgur upload failed");
-      }
-
-      return data.data.link;
-    }
-
-    // Handle screenshots (upload to Imgur if provided)
-    const images = [];
-    if (startImage) {
-      const url = await uploadToImgur(startImage);
-      images.push({ name: "Start Screenshot", url });
-    }
-    if (endImage) {
-      const url = await uploadToImgur(endImage);
-      images.push({ name: "End Screenshot", url });
-    }
-
-    // Add image links into the embed
-    if (images.length > 0) {
-      payload.embeds[0].fields = images.map(img => ({
-        name: img.name,
-        value: img.url
-      }));
-    }
-
     // Send to Discord
-    const response = await fetch(webhookUrl, {
+    const discordRes = await fetch(webhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(payload)
     });
 
+    const text = await discordRes.text();
     return {
-      statusCode: response.status,
-      body: await response.text()
+      statusCode: discordRes.status,
+      body: text
     };
-  } catch (err) {
+
+  } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({ error: error.message })
     };
   }
 }
