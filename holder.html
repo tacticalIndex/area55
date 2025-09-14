@@ -16,11 +16,9 @@
       --warn: #e3b341;
       --border: #263041;
     }
-
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 24px;
@@ -28,18 +26,15 @@
       color: var(--text);
       background: radial-gradient(1200px 800px at 10% 0%, #0d141c 0, var(--bg) 50%);
     }
-
     header {
       text-align: center;
       margin-bottom: 16px;
     }
-
     h1 {
       margin: 0 0 6px;
       font-weight: 800;
       letter-spacing: 0.5px;
     }
-
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -47,13 +42,11 @@
       max-width: 1000px;
       margin: 0 auto;
     }
-
     @media (min-width: 920px) {
       .grid {
         grid-template-columns: 1.1fr 0.9fr;
       }
     }
-
     .card {
       background: linear-gradient(180deg, var(--panel), var(--panel-2));
       border: 1px solid var(--border);
@@ -61,20 +54,17 @@
       padding: 16px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
-
     .card h2 {
       margin: 0 0 10px;
       font-size: 1.1rem;
       letter-spacing: .3px;
     }
-
     label {
       display: block;
       font-size: 0.9rem;
       color: var(--muted);
       margin: 10px 0 6px;
     }
-
     input, select, textarea {
       width: 100%;
       padding: 10px 12px;
@@ -85,16 +75,13 @@
       outline: none;
       transition: border .15s ease;
     }
-
     .row {
       display: flex;
       gap: 10px;
     }
-
     .row > * {
       flex: 1;
     }
-
     .timer {
       display: flex;
       align-items: center;
@@ -106,21 +93,18 @@
       border-radius: 12px;
       padding: 12px;
     }
-
     .time {
       font-variant-numeric: tabular-nums;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 2rem;
       letter-spacing: .5px;
     }
-
     .btns {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       align-items: center;
     }
-
     button {
       border: 1px solid var(--border);
       background: #132030;
@@ -129,37 +113,30 @@
       border-radius: 10px;
       cursor: pointer;
     }
-
     button.primary {
       background: #17314b;
       border-color: #25496b;
     }
-
     button.success {
       background: #12321f;
       border-color: #225f39;
     }
-
     button.warn {
       background: #3a2c12;
       border-color: #72581d;
     }
-
     button.danger {
       background: #3b161a;
       border-color: #6a272d;
     }
-
     button:disabled {
       opacity: .6;
       cursor: not-allowed;
     }
-
     .stamp {
       font-size: .9rem;
       color: var(--muted);
     }
-
     .paste-slot {
       border: 1px dashed #3a4a63;
       border-radius: 12px;
@@ -167,7 +144,6 @@
       background: #0c121a;
       position: relative;
     }
-
     .slot-head {
       display: flex;
       align-items: center;
@@ -175,16 +151,13 @@
       gap: 8px;
       margin-bottom: 8px;
     }
-
     .slot-title {
       font-weight: 700;
     }
-
     .slot-actions {
       display: flex;
       gap: 8px;
     }
-
     .slot-body {
       display: flex;
       align-items: center;
@@ -194,7 +167,6 @@
       border-radius: 10px;
       overflow: hidden;
     }
-
     .slot-body.empty::after {
       content: 'Click this area, then press Ctrl+V to paste a screenshot OR use Paste button';
       color: #7b8796;
@@ -203,20 +175,17 @@
       padding: 12px;
       max-width: 460px;
     }
-
     canvas {
       max-width: 100%;
       height: auto;
       display: block;
     }
-
     .footer {
       text-align: center;
       color: var(--muted);
       margin-top: 20px;
       font-size: .9rem;
     }
-
     .bar {
       height: 3px;
       background: linear-gradient(90deg, var(--accent), transparent);
@@ -224,7 +193,6 @@
       margin: 10px 0 16px;
       opacity: .5;
     }
-
     .note {
       background: #131a25;
       border: 1px solid var(--border);
@@ -236,14 +204,12 @@
   </style>
 </head>
 <body>
-  <!-- header -->
   <header>
     <h1>In-Game Staff Shift Tracker</h1>
     <div>Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
   </header>
 
   <div class="grid">
-    <!-- Left side -->
     <section class="card">
       <h2>Staff Details</h2>
       <div class="bar"></div>
@@ -282,7 +248,6 @@
           <div class="time" id="time">00:00:00</div>
           <div class="stamp" id="stamps">Start: — · End: —</div>
         </div>
-
         <div class="btns">
           <button id="startBtn" class="primary">Start</button>
           <button id="pauseBtn" class="warn" disabled>Pause</button>
@@ -293,7 +258,6 @@
       </div>
     </section>
 
-    <!-- Right side -->
     <section class="card">
       <h2>Shift Screenshots</h2>
       <div class="bar"></div>
@@ -326,151 +290,241 @@
     </section>
   </div>
 
-  <div class="footer">
-    Created by <b>tactical_index</b> | Open-source
-  </div>
+  <div class="footer">Created by <b>tactical_index</b> | Open-source</div>
 
   <script>
-    // stopwatch
-    let startTime, timerInterval;
+    // Stopwatch Logic
     const timeEl = document.getElementById("time");
     const stampsEl = document.getElementById("stamps");
+    const startBtn = document.getElementById("startBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resumeBtn = document.getElementById("resumeBtn");
+    const endBtn = document.getElementById("endBtn");
+    const resetBtn = document.getElementById("resetBtn");
 
-    function updateTime() {
-      const elapsed = Date.now() - startTime;
-      const hrs = String(Math.floor(elapsed / 3600000)).padStart(2, "0");
-      const mins = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, "0");
-      const secs = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, "0");
-      timeEl.textContent = `${hrs}:${mins}:${secs}`;
+    let startEpoch = null;
+    let elapsed = 0;
+    let running = false;
+    let tick = null;
+    let startStamp = null;
+    let endStamp = null;
+
+    function fmt(ms) {
+      const total = Math.floor(ms / 1000);
+      const h = String(Math.floor(total / 3600)).padStart(2, "0");
+      const m = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
+      const s = String(total % 60).padStart(2, "0");
+      return `${h}:${m}:${s}`;
     }
 
-    document.getElementById("startBtn").onclick = () => {
-      startTime = Date.now();
-      timerInterval = setInterval(updateTime, 1000);
-      stampsEl.textContent = `Start: ${new Date().toLocaleTimeString()} · End: —`;
-      toggleButtons("start");
-    };
+    function nowStamp() {
+      const d = new Date();
+      const z2 = (n) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${z2(d.getMonth() + 1)}-${z2(d.getDate())} ${z2(d.getHours())}:${z2(d.getMinutes())}:${z2(d.getSeconds())}`;
+    }
 
-    document.getElementById("pauseBtn").onclick = () => {
-      clearInterval(timerInterval);
-      toggleButtons("pause");
-    };
+    function render() {
+      const current = running
+        ? Date.now() - startEpoch + elapsed
+        : elapsed;
+      timeEl.textContent = fmt(current);
+      stampsEl.textContent = `Start: ${startStamp || "—"} · End: ${endStamp || "—"}`;
+    }
 
-    document.getElementById("resumeBtn").onclick = () => {
-      startTime = Date.now() - (parseInt(timeEl.textContent.split(":")[0]) * 3600000 +
-        parseInt(timeEl.textContent.split(":")[1]) * 60000 +
-        parseInt(timeEl.textContent.split(":")[2]) * 1000);
-      timerInterval = setInterval(updateTime, 1000);
-      toggleButtons("resume");
-    };
+    function setButtons(state) {
+      // state: "idle", "running", "paused", "ended"
+      startBtn.disabled = !(state === "idle");
+      pauseBtn.disabled = !(state === "running");
+      resumeBtn.disabled = !(state === "paused");
+      endBtn.disabled = !(state === "running" || state === "paused");
+      resetBtn.disabled = !(state === "paused" || state === "ended");
+    }
 
-    document.getElementById("endBtn").onclick = () => {
-      clearInterval(timerInterval);
-      stampsEl.textContent = stampsEl.textContent.replace("End: —", `End: ${new Date().toLocaleTimeString()}`);
-      toggleButtons("end");
-    };
+    function start() {
+      if (running) return;
+      if (!startStamp) {
+        startStamp = nowStamp();
+      }
+      startEpoch = Date.now();
+      running = true;
+      tick = setInterval(render, 250);
+      setButtons("running");
+      render();
+    }
 
-    document.getElementById("resetBtn").onclick = () => {
-      clearInterval(timerInterval);
+    function pause() {
+      if (!running) return;
+      running = false;
+      clearInterval(tick);
+      elapsed += Date.now() - startEpoch;
+      setButtons("paused");
+      render();
+    }
+
+    function resume() {
+      start();
+    }
+
+    function endShift() {
+      if (running) {
+        pause();
+      }
+      if (!endStamp) {
+        endStamp = nowStamp();
+      }
+      setButtons("ended");
+      render();
+    }
+
+    function reset() {
+      clearInterval(tick);
+      startEpoch = null;
+      elapsed = 0;
+      running = false;
+      startStamp = null;
+      endStamp = null;
       timeEl.textContent = "00:00:00";
-      stampsEl.textContent = "Start: — · End: —";
-      toggleButtons("reset");
-    };
-
-    function toggleButtons(state) {
-      document.getElementById("startBtn").disabled = state !== "reset";
-      document.getElementById("pauseBtn").disabled = state !== "start" && state !== "resume";
-      document.getElementById("resumeBtn").disabled = state !== "pause";
-      document.getElementById("endBtn").disabled = state === "reset";
-      document.getElementById("resetBtn").disabled = state === "reset";
+      setButtons("idle");
+      render();
     }
 
-    // screenshot paste slots
-    const slotStart = { canvas: document.getElementById("canvasStart"), blob: null };
-    const slotEnd = { canvas: document.getElementById("canvasEnd"), blob: null };
+    // Wire buttons
+    startBtn.addEventListener("click", start);
+    pauseBtn.addEventListener("click", pause);
+    resumeBtn.addEventListener("click", resume);
+    endBtn.addEventListener("click", endShift);
+    resetBtn.addEventListener("click", reset);
 
-    function handlePaste(e, slot) {
-      const items = e.clipboardData.items;
-      for (const item of items) {
-        if (item.type.startsWith("image/")) {
-          const file = item.getAsFile();
-          const ctx = slot.canvas.getContext("2d");
-          const img = new Image();
-          img.onload = () => {
-            slot.canvas.width = img.width;
-            slot.canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-            slot.blob = file;
-            slot.canvas.parentElement.classList.remove("empty");
-          };
-          img.src = URL.createObjectURL(file);
+    setButtons("idle");
+    render();
+
+    // Screenshot slots
+    const slotStart = {
+      canvas: document.getElementById("canvasStart"),
+      body: document.querySelector("#slotStart .slot-body"),
+      blob: null
+    };
+    const slotEnd = {
+      canvas: document.getElementById("canvasEnd"),
+      body: document.querySelector("#slotEnd .slot-body"),
+      blob: null
+    };
+
+    let activeSlot = null;
+
+    function drawBlobToCanvas(slot, blob) {
+      const img = new Image();
+      img.onload = () => {
+        const maxWidth = 1000;
+        const scale = Math.min(1, maxWidth / img.width);
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        slot.canvas.width = w;
+        slot.canvas.height = h;
+        const ctx = slot.canvas.getContext("2d");
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        slot.body.classList.remove("empty");
+      };
+      img.src = URL.createObjectURL(blob);
+      slot.blob = blob;
+    }
+
+    function handlePasteEvent(e) {
+      if (!activeSlot) return;
+      const items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+      for (const it of items) {
+        if (it.type.startsWith("image/")) {
+          const blob = it.getAsFile();
+          if (blob) {
+            drawBlobToCanvas(activeSlot, blob);
+            e.preventDefault();
+            return;
+          }
         }
       }
     }
 
-    document.querySelectorAll(".slot-body").forEach((el, idx) => {
-      el.addEventListener("paste", (e) => {
-        handlePaste(e, idx === 0 ? slotStart : slotEnd);
+    document.addEventListener("paste", handlePasteEvent);
+
+    // Clicking slot to activate for paste
+    slotStart.body.addEventListener("click", () => {
+      activeSlot = slotStart;
+      slotStart.body.focus();
+    });
+    slotEnd.body.addEventListener("click", () => {
+      activeSlot = slotEnd;
+      slotEnd.body.focus();
+    });
+
+    // Paste via clipboard.read (button could be added if needed)
+    document.querySelectorAll("[data-paste]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try {
+          if (!navigator.clipboard || !navigator.clipboard.read) {
+            alert("Clipboard read not supported");
+            return;
+          }
+          const items = await navigator.clipboard.read();
+          for (const item of items) {
+            for (const type of item.types) {
+              if (type.startsWith("image/")) {
+                const blob = await item.getType(type);
+                const slot = btn.dataset.paste === "start" ? slotStart : slotEnd;
+                drawBlobToCanvas(slot, blob);
+                return;
+              }
+            }
+          }
+          alert("No image found in clipboard");
+        } catch (err) {
+          console.warn(err);
+          alert("Clipboard paste failed");
+        }
       });
     });
 
-    document.querySelectorAll("[data-paste]").forEach((btn) => {
-      btn.onclick = async () => {
-        try {
-          const clipboardItems = await navigator.clipboard.read();
-          for (const item of clipboardItems) {
-            if (item.types.includes("image/png")) {
-              const blob = await item.getType("image/png");
-              const slot = btn.dataset.paste === "start" ? slotStart : slotEnd;
-              const ctx = slot.canvas.getContext("2d");
-              const img = new Image();
-              img.onload = () => {
-                slot.canvas.width = img.width;
-                slot.canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-                slot.blob = blob;
-                slot.canvas.parentElement.classList.remove("empty");
-              };
-              img.src = URL.createObjectURL(blob);
-            }
-          }
-        } catch {
-          alert("Clipboard paste failed");
-        }
-      };
-    });
-
     document.querySelectorAll("[data-clear]").forEach((btn) => {
-      btn.onclick = () => {
+      btn.addEventListener("click", () => {
         const slot = btn.dataset.clear === "start" ? slotStart : slotEnd;
         const ctx = slot.canvas.getContext("2d");
         ctx.clearRect(0, 0, slot.canvas.width, slot.canvas.height);
         slot.blob = null;
-        slot.canvas.parentElement.classList.add("empty");
-      };
+        slot.body.classList.add("empty");
+      });
     });
 
-    // build shift lines
+    // Build the description / embed text
     function buildShiftLines() {
-      const roblox = document.getElementById("roblox").value || "—";
-      const discord = document.getElementById("discord").value || "—";
-      const codename = document.getElementById("codename").value || "—";
-      const stamps = stampsEl.textContent;
+      const roblox = document.getElementById("roblox").value.trim() || "—";
+      const discordUser = document.getElementById("discord").value.trim() || "—";
+      const codename = document.getElementById("codename").value.trim() || "—";
+      const team = document.getElementById("team").value;
+      const duration = timeEl.textContent;
+      const startTimeText = startStamp || "—";
+      const endTimeText = endStamp || "—";
 
       return [
+        `**__SCP:RP Shift Log__**`,
         `**Roblox:** ${roblox}`,
-        `**Discord:** ${discord}`,
+        `**Discord:** ${discordUser}`,
         `**Codename:** ${codename}`,
-        `**Shift:** ${stamps}`,
-      ];
+        `**Team:** ${team}`,
+        `**Start:** ${startTimeText}`,
+        `**End:** ${endTimeText}`,
+        `**Duration:** ${duration}`
+      ].join("\n");
     }
 
     function getBase64FromCanvas(slot) {
       if (!slot.blob) return null;
-      return slot.canvas.toDataURL("image/png").split(",")[1];
+      // toDataURL returns like "data:image/png;base64,...."
+      const dataUrl = slot.canvas.toDataURL("image/png");
+      return dataUrl.split(",")[1]; // the base64 part
     }
 
-    // submit handler
+    // Submit handler
     document.getElementById("shift-form").addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -481,18 +535,20 @@
       sendBtn.disabled = true;
       sendBtn.textContent = "Sending...";
 
-      const description = buildShiftLines().join("\n");
+      const description = buildShiftLines();
       const payload = {
-        embeds: [{
-          title: "Shift Report",
-          description: description
-        }],
+        embeds: [
+          {
+            title: "Shift Report",
+            description: description
+          }
+        ],
         username: "Shift Tracker Bot"
       };
 
       const body = {
-        team,
-        payload,
+        team: team,
+        payload: payload,
         startImage: getBase64FromCanvas(slotStart),
         endImage: getBase64FromCanvas(slotEnd)
       };
@@ -500,7 +556,9 @@
       try {
         const response = await fetch("/.netlify/functions/proxy", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify(body)
         });
 
@@ -512,8 +570,8 @@
           statusDiv.textContent = `❌ Error: ${err}`;
           statusDiv.style.color = "salmon";
         }
-      } catch (error) {
-        statusDiv.textContent = `⚠️ Failed: ${error.message}`;
+      } catch (err) {
+        statusDiv.textContent = `⚠️ Failed: ${err.message}`;
         statusDiv.style.color = "salmon";
       }
 
