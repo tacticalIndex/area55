@@ -11,7 +11,6 @@ export async function handler(event) {
     const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
     const apiKey = process.env.CLOUDINARY_API_KEY;
     const apiSecret = process.env.CLOUDINARY_API_SECRET;
-    const folder = "scp-shifts";
 
     async function uploadBase64(base64, filename) {
       if (!base64) return null;
