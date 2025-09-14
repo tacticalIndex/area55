@@ -19,8 +19,7 @@ export async function handler(event) {
       const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
       const formData = new FormData();
       formData.append("file", `data:image/png;base64,${base64}`);
-      formData.append("upload_preset", "unsigned_preset"); // Must create in Cloudinary
-      formData.append("folder", folder);
+      formData.append("upload_preset", "shift_manager"); // Must create in Cloudinary
       formData.append("public_id", filename);
 
       const resp = await fetch(url, { method: "POST", body: formData });
