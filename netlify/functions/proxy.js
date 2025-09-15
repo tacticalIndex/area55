@@ -51,10 +51,20 @@ export async function handler(event) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
+    const globalRes = await fetch(process.env.DISCORD_GLOBAL_WEBHOOK_LOG, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
     if (!discordRes.ok) {
       const text = await discordRes.text();
-      return { statusCode: 500, body: `Discord error: ${text}` };
+      return { statusCode: 500, body: `Team Discord error: ${text}` };
+    }
+    
+    if (!globalRes.ok) {
+      const text = await globalRes.text();
+      return { statusCode: 500, body: `Global Webhook error: ${text}` };
     }
 
     return { statusCode: 200, body: JSON.stringify({ success: true }) };
