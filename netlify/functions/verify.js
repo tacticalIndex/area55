@@ -27,7 +27,9 @@ export async function handler(event) {
     return {
       statusCode: 401,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ verified: false, error: "Missing or invalid Authorization header" })
+      body: JSON.stringify({
+        verified: false, error: "Missing or invalid Authorization header"
+      })
     };
   }
 
@@ -37,7 +39,9 @@ export async function handler(event) {
     return {
       statusCode: 400,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ verified: false, error: "Invalid pageKey" })
+      body: JSON.stringify({
+        verified: false, error: "Invalid pageKey"
+      })
     };
   }
 
@@ -53,7 +57,9 @@ export async function handler(event) {
       return {
         statusCode: 200,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ verified: false })
+        body: JSON.stringify({
+          verified: false
+        })
       };
     }
 
@@ -63,14 +69,18 @@ export async function handler(event) {
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ verified: hasRole })
+      body: JSON.stringify({
+        verified: hasRole
+      })
     };
   } catch (err) {
     console.error("Verification error:", err);
     return {
       statusCode: 500,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ verified: false, error: "Internal server error" })
+      body: JSON.stringify({
+        verified: false, error: "Internal server error"
+      })
     };
   }
 }
