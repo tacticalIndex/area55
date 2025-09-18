@@ -5,7 +5,9 @@ export async function handler(event) {
 
   const pageKey = event.queryStringParameters.pageKey;
   if (!pageKey) {
-    return { statusCode: 400, body: "Missing pageKey" };
+    return {
+      statusCode: 400, body: "Missing pageKey"
+    };
   }
 
   const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
@@ -14,6 +16,8 @@ export async function handler(event) {
 
   return {
     statusCode: 302,
-    headers: { Location: url }
+    headers: {
+      Location: url
+    }
   };
 }
