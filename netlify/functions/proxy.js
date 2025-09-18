@@ -1,13 +1,17 @@
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405, body: "Method Not Allowed"
+    };
   }
 
   let body;
   try {
     body = JSON.parse(event.body);
   } catch {
-    return { statusCode: 400, body: "Invalid JSON" };
+    return {
+      statusCode: 400, body: "Invalid JSON"
+    };
   }
 
   const { team, payload, startImage, endImage } = body;
@@ -21,14 +25,17 @@ export async function handler(event) {
   };
 
   const webhookUrl = webhookMap[team];
-  if (!webhookUrl) return { statusCode: 400, body: "Unknown team" };
+  if (!webhookUrl) return {
+    statusCode: 400, body: "Unknown team"
+  };
 
   async function uploadToCloudinary(base64, public_id_suffix) {
     if (!base64) return null;
     const form = new FormData();
     form.append("file", `data:image/png;base64,${base64}`);
     form.append("upload_preset", "shift_manager");
-    if (public_id_suffix) form.append("public_id", public_id_suffix);
+    if (public_id_suffix) 
+      form.append("public_id", public_id_suffix);
 
     const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: "POST",
@@ -59,16 +66,24 @@ export async function handler(event) {
 
     if (!discordRes.ok) {
       const text = await discordRes.text();
-      return { statusCode: 500, body: `Team Discord error: ${text}` };
+      return {
+        statusCode: 500, body: `Team Discord error: ${text}`
+      };
     }
     
     if (!globalRes.ok) {
       const text = await globalRes.text();
-      return { statusCode: 500, body: `Global Webhook error: ${text}` };
+      return {
+        statusCode: 500, body: `Global Webhook error: ${text}`
+      };
     }
 
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+    return {
+      statusCode: 200, body: JSON.stringify({ success: true })
+    };
   } catch (err) {
-    return { statusCode: 500, body: `Server error: ${err.message}` };
+    return {
+      statusCode: 500, body: `Server error: ${err.message}`
+    };
   }
 }
