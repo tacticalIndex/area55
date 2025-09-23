@@ -17,8 +17,8 @@ export async function handler(event) {
       roleId: "1338444679049379910", // acting department
     },
     morphingdepartment: {
-      guildId: "1404264776871182446", // morphing server
-      roleId: "1404268189009055866", // morphing department
+      guildId: "1403713920337707009", // morphing server
+      roleId: "1404013149815967744", // morphing department
     }
   };
 
