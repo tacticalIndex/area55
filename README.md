@@ -1,4 +1,3 @@
-# ariv_staff_activity_logger
-In-game activity logging site for ARI-V staff. 
-
-(Hosted on netlify instead of Github Pages only because webhooks are used and I don't really feel like leaking them)
+# Area-55 Website
+## Including choppovm's Shift Logger logic
+This was originally a project from chop, though I took it over (basically just took the open source code) and now I'm using it for Area-55. Basically a playtest before I release it to the public with SCiPNET.
