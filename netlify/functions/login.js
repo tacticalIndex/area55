@@ -1,6 +1,6 @@
 export async function handler(event) {
   const CLIENT_ID = process.env.DISCORD_APPLICATION_CLIENT_ID;
-  const REDIRECT_URI = "https://a55staffshiftmanagement.netlify.app/.netlify/functions/callback";
+  const REDIRECT_URI = "https://area-55.netlify.app/.netlify/functions/callback";
   const scopes = ["identify", "guilds", "guilds.members.read"];
 
   const pageKey = event.queryStringParameters.pageKey;
