@@ -537,8 +537,12 @@
       sendBtn.textContent = "Sending...";
 
       const payload = {
-        embeds: [{ title: "Shift Report", description: buildShiftLines() }],
+        embeds: [{
+          title: "Shift Report", 
+          description: buildShiftLines()
+        }],
         username: "Shift Tracker Bot"
+        footer: `${discordUser} • ${new Date().toLocaleString()}`
       };
 
       const body = {
