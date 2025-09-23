@@ -1,7 +1,7 @@
 export async function handler(event) {
   const CLIENT_ID = process.env.DISCORD_APPLICATION_CLIENT_ID;
   const CLIENT_SECRET = process.env.DISCORD_APPLICATION_CLIENT_SECRET;
-  const REDIRECT_URI = "https://a55staffshiftmanagement.netlify.app/.netlify/functions/callback";
+  const REDIRECT_URI = "https://area-55.netlify.app/.netlify/functions/callback";
 
   // Server-side config
   const CONFIGS = {
