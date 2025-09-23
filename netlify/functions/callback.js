@@ -26,8 +26,8 @@ export async function handler(event) {
       webhook: process.env.DISCORD_WEBHOOK_ACTINGDEPARTMENT
     },
     morphingdepartment: {
-      guildId: "1404264776871182446", // morphing server
-      roleId: "1404268189009055866", // morphing department
+      guildId: "1403713920337707009", // morphing server
+      roleId: "1404013149815967744", // morphing department
       webhook: process.env.DISCORD_WEBHOOK_MORPHINGDEPARTMENT
     }
   };
