@@ -25,8 +25,10 @@ export async function handler(event) {
   };
 
   const webhookUrl = webhookMap[team];
-  if (!webhookUrl) return {
-    statusCode: 400, body: "Unknown team"
+  if (team===NONE) return {
+    statusCode: 400, body: "Team not Selected."
+  } else if (!webhookUrl) return {
+    statuscode: 400, body: "Unknown team";
   };
 
   async function uploadToCloudinary(base64, public_id_suffix) {
