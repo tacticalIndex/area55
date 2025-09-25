@@ -25,9 +25,7 @@ export async function handler(event) {
   };
 
   const webhookUrl = webhookMap[team];
-  if (team===NONE) return {
-    statusCode: 400, body: "Team not Selected."
-  } else if (!webhookUrl) return {
+  if (!webhookUrl) return {
     statuscode: 400, body: "Unknown team";
   };
 
