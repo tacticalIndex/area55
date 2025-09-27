@@ -568,9 +568,10 @@
         statusDiv.textContent = `⚠️ Failed: ${err.message}`;
         statusDiv.style.color = "salmon";
       }
-
-      sendBtn.disabled = false;
-      sendBtn.textContent = "Send";
+			setTimeout(() => {
+        sendBtn.disabled = false;
+      	sendBtn.textContent = "Send";
+      }, 5000); // Wait 5 seconds
     });
   </script>
 </body>
