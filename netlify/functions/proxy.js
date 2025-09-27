@@ -26,7 +26,7 @@ export async function handler(event) {
 
   const webhookUrl = webhookMap[team];
   if (!webhookUrl) return {
-    statuscode: 400, body: "Unknown team";
+    statusCode: 400, body: "Unknown team"
   };
 
   async function uploadToCloudinary(base64, public_id_suffix) {
