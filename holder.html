@@ -11,7 +11,7 @@
       --panel-2: #0f141b;
       --text: #e6edf3;
       --muted: #9aa4af;
-      --accent: #5c3787;
+      --accent: #e63946;
       --ok: #2ea043;
       --warn: #e3b341;
       --border: #263041;
@@ -323,7 +323,7 @@
     </section>
   </div>
 
-  <div class="footer">Created by <strong>tactical_index</strong></div>
+  <div class="footer">Created by <b>tactical_index</b> | Open-source</div>
 
   <script>
     // ===== Stopwatch =====
@@ -535,14 +535,11 @@
       const sendBtn = e.target.querySelector("button[type=submit]");
       sendBtn.disabled = true;
       sendBtn.textContent = "Sending...";
+      statusDiv.textContent = ""
 
       const payload = {
-        embeds: [{
-          title: "Shift Report", 
-          description: buildShiftLines()
-        }],
-        username: "Shift Tracker Bot",
-        footer: `${discordUser} • ${new Date().toLocaleString()}`
+        embeds: [{ title: "Shift Report", description: buildShiftLines() }],
+        username: "Shift Tracker Bot"
       };
 
       const body = {
