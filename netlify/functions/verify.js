@@ -21,12 +21,12 @@ export async function handler(event) {
       roleId: "1404013149815967744", // morphing department
     },
     administration: {
-      guildId: "", //main server
-      roleId: "", //administration role
+      guildId: "1413745795596812310", //overwatch server
+      roleId: "1413746152121307246", //administration role
     },
     botOwner: {
-      guildId: "", // main server
-      userId: "", //index's DUID
+      guildId: "1413744931918450861", // main server
+      userId: "1162183562519384074", //index's DUID
     }
   };
 
