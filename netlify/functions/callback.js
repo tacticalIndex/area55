@@ -30,6 +30,11 @@ export async function handler(event) {
       roleId: "1404013149815967744", // morphing department
       webhook: process.env.DISCORD_WEBHOOK_MORPHINGDEPARTMENT
     }
+    administration: {
+    	guildId: "1413745795596812310", //overwatch server
+			roleId: "1413746152121307246", //administrative role
+			webhook: process.env.DISCORD_WEBHOOK_ADMINISTRATION
+  	}
   };
   const globalWebhook = process.env.DISCORD_GLOBAL_WEBHOOK_LOG; // staff server access attempt log
 
