@@ -19,6 +19,10 @@ export async function handler(event) {
     morphingdepartment: {
       guildId: "1403713920337707009", // morphing server
       roleId: "1404013149815967744", // morphing department
+    },
+    administration: {
+      guildId: "", //main server
+      roleId: "", //administration role
     }
   };
 
