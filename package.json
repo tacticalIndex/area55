@@ -1,5 +1,5 @@
 {
-  "name": "A55_staff_activity_logger",
+  "name": "a55_staff_activity_logger",
   "version": "1.0.0",
   "description": "In-game activity logging site for A-55 staff.",
   "main": "index.js",
