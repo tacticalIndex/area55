@@ -39,6 +39,12 @@
       .bar { height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 999px; margin: 10px 0 16px; opacity:.5; }
   
       .note { background:#131a25; border:1px solid var(--border); border-radius: 10px; padding:10px; color: var(--muted); font-size:.9rem; }
+      .welcome {
+        text-align: left;
+        margin-left: 20px;
+        font-size: 18.5px;
+        
+      }
     </style>
   </head>
   <body data-bm="55" data-page-key="gamemoderationteam">
@@ -46,6 +52,7 @@
       (async () => {
         const token = sessionStorage.getItem("discord_access_token");
         const pageKey = document.body.dataset.pageKey; // "gamemoderationteam"
+        
           
         if (!token) {
           // Send to login with pageKey
@@ -59,9 +66,19 @@
           });
             
           const data = await res.json();
-            
+          
+          
+          
           if (!data.verified) {
             window.location.href = "/redirect.html";
+          } else {
+            if (data.username && data.highestRole) {
+              document.getElementById("staffname").textContent =
+              `Welcome, ${data.username}. Your highest role is: ${data.highestRole}`;
+            } else {
+              document.getElementById("staffname").textContent =
+              "Welcome, GMT Member.";
+            }
           }
           // else: stay on page
         } catch (err) {

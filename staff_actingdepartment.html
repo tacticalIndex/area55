@@ -18,11 +18,11 @@
         box-sizing: border-box;
       }
       body {
-		margin: 0; 
+		    margin: 0; 
         padding: 24px 72px 24px 72px; 
-    	font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-    	color: var(--text); 
-    	background: radial-gradient(1200px 800px at 10% 0%, #0d141c 0, var(--bg) 50%);
+    	  font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    	  color: var(--text); 
+    	  background: radial-gradient(1200px 800px at 10% 0%, #0d141c 0, var(--bg) 50%);
       }
       header {
         text-align: center; 
@@ -81,6 +81,12 @@
         color: var(--muted); 
         font-size: 0.9rem;
       }
+      .welcome {
+        text-align: left;
+        margin-left: 20px;
+        font-size: 18.5px;
+        
+      }
     </style>
   </head>
   <body data-bm="55" data-page-key="actingdepartment">
@@ -88,6 +94,7 @@
       (async () => {
         const token = sessionStorage.getItem("discord_access_token");
         const pageKey = document.body.dataset.pageKey; // "actingdepartment"
+        
           
         if (!token) {
           // Send to login with pageKey
@@ -101,9 +108,19 @@
           });
             
           const data = await res.json();
-            
+          
+          
+          
           if (!data.verified) {
             window.location.href = "/redirect.html";
+          } else {
+            if (data.username && data.highestRole) {
+              document.getElementById("staffname").textContent =
+              `Welcome, ${data.username}. Your highest role is: ${data.highestRole}`;
+            } else {
+              document.getElementById("staffname").textContent =
+              "Welcome, AcD Member.";
+            }
           }
           // else: stay on page
         } catch (err) {
@@ -114,8 +131,8 @@
     </script>
     <header>
       <h1>Acting Department | Activity Tracker</h1>
-      <div class="">
-        Created by tactical_index for the SCP: Roleplay custom server <b>Area-55</b>
+      <div class="welcome">
+        <p id="staffname"></p>
       </div>
     </header>
   

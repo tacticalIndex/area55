@@ -56,6 +56,7 @@ export async function handler(event) {
   const { guildId, roleId } = CONFIGS[pageKey];
 
   try {
+    // 1. Fetch member info
     const memberResponse = await fetch(
       `https://discord.com/api/users/@me/guilds/${guildId}/member`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -65,20 +66,49 @@ export async function handler(event) {
       return {
         statusCode: 200,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          verified: false
-        })
+        body: JSON.stringify({ verified: false })
       };
     }
-
+    
     const member = await memberResponse.json();
+
+    // 2. Fetch user info for username
+    const userResponse = await fetch(
+      "https://discord.com/api/users/@me",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    let username = null;
+    if (userResponse.ok) {
+      const user = await userResponse.json();
+      username = `${user.username}#${user.discriminator}`; // or use user.global_name if needed
+    }
+
+    // 3. Fetch roles in the guild
+    const botToken = process.env.DISCORD_BOT_TOKEN; // You need your bot token here and set in Netlify env vars
+    const rolesResponse = await fetch(
+      `https://discord.com/api/guilds/${guildId}/roles`,
+      { headers: { Authorization: `Bot ${botToken}` } }
+    );
+    let highestRole = null;
+    if (rolesResponse.ok && Array.isArray(member.roles)) {
+      const roles = await rolesResponse.json();
+      // Filter to member's roles and sort by position descending
+      const memberRoles = roles.filter(r => member.roles.includes(r.id));
+      if (memberRoles.length) {
+        memberRoles.sort((a, b) => b.position - a.position);
+        highestRole = memberRoles[0].name;
+      }
+    }
+
     const hasRole = Array.isArray(member.roles) && member.roles.includes(roleId);
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        verified: hasRole
+        verified: hasRole,
+        username,
+        highestRole
       })
     };
   } catch (err) {
