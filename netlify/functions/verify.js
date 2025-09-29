@@ -23,6 +23,10 @@ export async function handler(event) {
     administration: {
       guildId: "", //main server
       roleId: "", //administration role
+    },
+    botOwner: {
+      guildId: "", // main server
+      userId: "", //index's DUID
     }
   };
 
