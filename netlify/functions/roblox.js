@@ -1,6 +1,4 @@
-exports.handler = async function(event, context) { return { statusCode: 410 body: "Service Deprecated." } }
-
-/*const noblox = require("noblox.js");
+const noblox = require("noblox.js");
 
 // group id hardcoded
 const GROUP_ID = 34847172;
@@ -91,4 +89,4 @@ exports.handler = async function(event, context) {
       })
     };
   }
-};*/
+};
