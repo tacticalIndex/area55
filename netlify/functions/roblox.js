@@ -1,4 +1,4 @@
-return { statusCode: 410 body: "Service Deprecated." }
+exports.handler = async function(event, context) { return { statusCode: 410 body: "Service Deprecated." } }
 
 /*const noblox = require("noblox.js");
 
