@@ -29,7 +29,7 @@ exports.handler = async function(event, context) {
     discord = body.discorduser;
     discordId = body.discordId;
 
-    if (!(username && rank &&)) {
+    if (!(username && rank)) {
       throw new Error("Missing username, rank");
     }
   } catch (e) {
