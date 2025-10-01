@@ -8,17 +8,17 @@ exports.handler = async function(event, context) {
   const requiredValue = process.env.CUSTOM_AUTH_SECRET;
 
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
+    return JSON.stringify({ statusCode: 405, body: "Method not allowed" });
   }
 
   const incomingHeader = event.headers[requiredHeader];
   if (incomingHeader !== requiredValue) {
-    return { statusCode: 403, body: "Forbidden: Invalid authentication header." };
+    return JSON.stringify({ statusCode: 403, body: "Forbidden: Invalid authentication header." });
   }
 
   const cookie = process.env.ROBLOX_COOKIE;
   if (!cookie) {
-    return { statusCode: 500, body: "Roblox cookie not set" };
+    return JSON.stringify({ statusCode: 500, body: "Roblox cookie not set" });
   }
 
   let username, rank, discord, discordId;
@@ -33,7 +33,7 @@ exports.handler = async function(event, context) {
       throw new Error("Missing username, rank");
     }
   } catch (e) {
-    return { statusCode: 400, body: e.message };
+    return JSON.stringify({ statusCode: 400, body: e.message });
   }
 
   try {
