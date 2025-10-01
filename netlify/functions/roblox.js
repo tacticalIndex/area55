@@ -56,7 +56,7 @@ exports.handler = async function(event, context) {
         roleName,
         discord,
         discordId,
-        message: `Changed role for ${username} (${userId}) in group ${GROUP_ID} to "${roleName}" (rank ${rank}). Linked to Discord user ${discord} (${discordId}).`
+        message: `Changed role for ${username} ([${userId}](https://roblox.com/users/${userId}/profile)) in group [${GROUP_ID}](https://www.roblox.com/communities/34847172/about) to "${roleName}" (Rank ID: ${rank}).`
       })
     };
   } catch (error) {
