@@ -85,9 +85,7 @@ exports.handler = async function(event, context) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         success: false,
-        message: error.message,
-        discord,
-        discordId
+        message: error.message
       })
     };
   }
