@@ -7,18 +7,33 @@ exports.handler = async function(event, context) {
   const requiredHeader = "x-custom-auth";
   const requiredValue = process.env.CUSTOM_AUTH_SECRET;
 
+  // Only allow POST
   if (event.httpMethod !== "POST") {
-    return JSON.stringify({ statusCode: 405, body: "Method not allowed" });
+    return {
+      statusCode: 405,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: false, message: "Method not allowed" })
+    };
   }
 
+  // Check auth header
   const incomingHeader = event.headers[requiredHeader];
   if (incomingHeader !== requiredValue) {
-    return JSON.stringify({ statusCode: 403, body: "Forbidden: Invalid authentication header." });
+    return {
+      statusCode: 403,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: false, message: "Forbidden: Invalid authentication header." })
+    };
   }
 
+  // Check cookie
   const cookie = process.env.ROBLOX_COOKIE;
   if (!cookie) {
-    return JSON.stringify({ statusCode: 500, body: "Roblox cookie not set" });
+    return {
+      statusCode: 500,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: false, message: "Roblox cookie not set" })
+    };
   }
 
   let username, rank, discord, discordId;
@@ -30,10 +45,14 @@ exports.handler = async function(event, context) {
     discordId = body.discordId;
 
     if (!(username && rank)) {
-      throw new Error("Missing username, rank");
+      throw new Error("Missing username or rank");
     }
   } catch (e) {
-    return JSON.stringify({ statusCode: 400, body: e.message });
+    return {
+      statusCode: 400,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: false, message: e.message })
+    };
   }
 
   try {
@@ -47,6 +66,7 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         success: true,
         username,
@@ -56,13 +76,19 @@ exports.handler = async function(event, context) {
         roleName,
         discord,
         discordId,
-        message: `Changed role for ${username} ([${userId}](https://roblox.com/users/${userId}/profile)) in group [${GROUP_ID}](https://www.roblox.com/communities/34847172/about) to "${roleName}" (Rank ID: ${rank}).`
+        message: `Changed role for ${username} ([${userId}](https://roblox.com/users/${userId}/profile)) in group [${GROUP_ID}](https://www.roblox.com/communities/${GROUP_ID}/about) to "${roleName}" (Rank ID: ${rank}).`
       })
     };
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, message: error.message, discord, discordId })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        success: false,
+        message: error.message,
+        discord,
+        discordId
+      })
     };
   }
 };
