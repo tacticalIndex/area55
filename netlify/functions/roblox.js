@@ -27,7 +27,7 @@ exports.handler = async function(event, context) {
   }
 
   // Check cookie
-  const cookie = process.env.ROBLOX_COOKIE;
+  const cookie = process.env.HOLDER_RBLX_COOKIE;
   if (!cookie) {
     return {
       statusCode: 500,
@@ -83,10 +83,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        success: false,
-        message: error.message
-      })
+      body: JSON.stringify({success: false, message: error.message})
     };
   }
 };
