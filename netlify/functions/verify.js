@@ -1,3 +1,5 @@
+import { use } from "react";
+
 export async function handler(event) {
   const CONFIGS = {
     eventcommittee: {
@@ -80,11 +82,15 @@ export async function handler(event) {
     let username = null;
     if (userResponse.ok) {
       const user = await userResponse.json();
-      username = `${user.username}#${user.discriminator}`; // or use user.global_name if needed
+      if (user.discriminator === 0) {
+        username = `${user.username}`;
+      } else {
+        username = `${user.username}#${user.discriminator}`;
+      }
     }
 
-    // 3. Fetch roles in the guild
-    const botToken = process.env.DISCORD_BOT_TOKEN; // You need your bot token here and set in Netlify env vars
+    
+    const botToken = process.env.DISCORD_BOT_TOKEN;
     const rolesResponse = await fetch(
       `https://discord.com/api/guilds/${guildId}/roles`,
       { headers: { Authorization: `Bot ${botToken}` } }
@@ -92,7 +98,7 @@ export async function handler(event) {
     let highestRole = null;
     if (rolesResponse.ok && Array.isArray(member.roles)) {
       const roles = await rolesResponse.json();
-      // Filter to member's roles and sort by position descending
+      // ilter to members roles and sort by position descending
       const memberRoles = roles.filter(r => member.roles.includes(r.id));
       if (memberRoles.length) {
         memberRoles.sort((a, b) => b.position - a.position);
