@@ -39,5 +39,6 @@ button.danger { background: #3b161a; border-color: #6a272d; }
 button:disabled { opacity:.6; cursor:not-allowed; }
     
 .footer { text-align:center; color:var(--muted); margin-top: 20px; font-size:.9rem; }
-    
+.branding { font-size:0.95rem; color:var(--muted); margin-top:-8px; }
+
 .bar { height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 999px; margin: 10px 0 16px; opacity:.5; }
