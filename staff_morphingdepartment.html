@@ -33,8 +33,13 @@
               document.getElementById("staffname").textContent =
               `Welcome, ${data.username}. Your highest role is: ${data.highestRole}`;
             } else {
-              document.getElementById("staffname").textContent =
-              "Welcome, MD Member.";
+              if (data.username && !data.highestRole) {
+                document.getElementById("staffname").textContent =
+                `Welcome, ${data.username}.`;
+              } else {
+                document.getElementById("staffname").textContent =
+                "Welcome, Morphing Departent Member.";
+              }
             }
           }
           // else: stay on page
