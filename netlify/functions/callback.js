@@ -95,7 +95,7 @@ exports.handler = async (event) => {
       body: `
         <script>
           sessionStorage.setItem("discord_access_token", "${accessToken}");
-          window.location.href = "${hasRole ? `/staff_${pageKey}.html` : `/redirect.html`}";
+          window.location.href = "${hasRole ? `/staff/${pageKey}` : `/redirect.html`}";
         </script>
       `
     };
