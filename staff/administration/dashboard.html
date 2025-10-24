@@ -2,13 +2,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SCP:RP Staff Shift Tracker</title>
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="staff/staff.css">
   </head>
-  <body data-bm="55" data-page-key="morphingdepartment">
+  <body data-bm="55" data-page-key="administration">
     <script>
       (async () => {
         const token = sessionStorage.getItem("discord_access_token");
-        const pageKey = document.body.dataset.pageKey; // "actingdepartment"
+        const pageKey = document.body.dataset.pageKey; // "administration"
         
           
         if (!token) {
@@ -38,7 +38,7 @@
                 `Welcome, ${data.username}.`;
               } else {
                 document.getElementById("staffname").textContent =
-                "Welcome, Morphing Departent Member.";
+                `Welcome, Administration Member.`;
               }
             }
           }
@@ -50,7 +50,7 @@
       })();
     </script>
     <header>
-      <h1>Morphing Department | Activity Tracker</h1>
+      <h1>Administration | Management Dashboard</h1>
       <div class="welcome">
         <p id="staffname"></p>
       </div>
@@ -60,7 +60,7 @@
       <h2>This section is in development!</h2>
       <div class="bar"></div>
       <label>Coming soon.</label>
-      </div>
+    </div>
     
-    <div class="footer">Created by <strong>tactical_index</strong> for Area-55</div>
+    <div class="footer">Created by <b>tactical_index</b> for Area-55</div>
   </body></html>

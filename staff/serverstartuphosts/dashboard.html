@@ -1,14 +1,14 @@
 <html><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="staff/staff.css">
     <title>SCP:RP Staff Shift Tracker</title>
-    <link rel="stylesheet" href="staff.css">
   </head>
-  <body data-bm="55" data-page-key="gamemoderationteam">
+  <body data-bm="55" data-page-key="serverstartuphosts">
     <script>
       (async () => {
         const token = sessionStorage.getItem("discord_access_token");
-        const pageKey = document.body.dataset.pageKey; // "gamemoderationteam"
+        const pageKey = document.body.dataset.pageKey; // "actingdepartment"
         
           
         if (!token) {
@@ -38,7 +38,7 @@
                 `Welcome, ${data.username}.`;
               } else {
                 document.getElementById("staffname").textContent =
-                `Welcome, Game Moderation Team Member.`;
+                `Welcome, Server Start Up Hosts Member.`;
               }
             }
           }
@@ -50,8 +50,10 @@
       })();
     </script>
     <header>
-      <h1>Game Moderation Team | Activity Tracker</h1>
-      <div class="">Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
+      <h1>Server Start Up Hosts | Activity Tracker</h1>
+      <div class="welcome">
+        <p id="staffname"></p>
+      </div>
     </header>
   
     <div class="card">
@@ -60,6 +62,5 @@
       <label>Coming soon.</label>
       </div>
     
-    <div class="footer">Created by <strong>tactical_index</strong> for Area-55</div>
-  </body>
-</html>
+    <div class="footer">Created by <b>tactical_index</b> for Area-55</div>
+  </body></html>

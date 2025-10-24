@@ -2,13 +2,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SCP:RP Staff Shift Tracker</title>
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="staff/staff.css">
   </head>
-  <body data-bm="55" data-page-key="actingdepartment">
+  <body data-bm="55" data-page-key="gamemoderationteam">
     <script>
       (async () => {
         const token = sessionStorage.getItem("discord_access_token");
-        const pageKey = document.body.dataset.pageKey; // "actingdepartment"
+        const pageKey = document.body.dataset.pageKey; // "gamemoderationteam"
         
           
         if (!token) {
@@ -38,7 +38,7 @@
                 `Welcome, ${data.username}.`;
               } else {
                 document.getElementById("staffname").textContent =
-                "Welcome, AcD Member.";
+                `Welcome, Game Moderation Team Member.`;
               }
             }
           }
@@ -50,10 +50,8 @@
       })();
     </script>
     <header>
-      <h1>Acting Department | Activity Tracker</h1>
-      <div class="welcome">
-        <p id="staffname"></p>
-      </div>
+      <h1>Game Moderation Team | Activity Tracker</h1>
+      <div class="">Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
     </header>
   
     <div class="card">
@@ -62,6 +60,6 @@
       <label>Coming soon.</label>
       </div>
     
-    <div class="footer">Created by <strong>tactical_index</strong> for <b>Area-55</b></div>
+    <div class="footer">Created by <strong>tactical_index</strong> for Area-55</div>
   </body>
 </html>
