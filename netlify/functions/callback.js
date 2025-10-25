@@ -85,6 +85,7 @@ exports.handler = async (event) => {
 
     const member = await memberResponse.json();
     const hasRole = member.roles.includes(roleId);
+    const avatar = `https://cdn.discord.com/avatars/${user.id}/${user.avatar}.png`
 
     // 4. Send webhook
     await sendEmbed(user, hasRole, globalWebhook, pageKey);
@@ -95,7 +96,7 @@ exports.handler = async (event) => {
       body: `
         <script>
           sessionStorage.setItem("discord_access_token", "${accessToken}");
-          window.location.href = "${hasRole ? `/staff/${pageKey}` : `/redirect.html`}";
+          window.location.href = "${hasRole ? `/staff/${pageKey}/dashboard` : `/redirect.html`}";
         </script>
       `
     };
