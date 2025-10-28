@@ -42,3 +42,13 @@ button:disabled { opacity:.6; cursor:not-allowed; }
 .branding { font-size:0.95rem; color:var(--muted); margin-top:-8px; }
 
 .bar { height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 999px; margin: 10px 0 16px; opacity:.5; }
+
+.codeblock {
+    font-family: "Fira Code", "JetBrains Mono", Consolas, "Lucida Console", Courier, monospace;
+    background-color: #0e0e0e;
+    border-radius: 14px;
+    border-color: #4b4b4b;
+    border-width: .75px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
