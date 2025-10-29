@@ -45,10 +45,15 @@ button:disabled { opacity:.6; cursor:not-allowed; }
 
 .codeblock {
     font-family: "Fira Code", "JetBrains Mono", Consolas, "Lucida Console", Courier, monospace;
+    color: #e1e1e1;
     background-color: #0e0e0e;
     border-radius: 14px;
-    border-color: #4b4b4b;
-    border-width: .75px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    outline: .4px solid #565656;
+    outline-offset: 1.25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 5.75px;
 }

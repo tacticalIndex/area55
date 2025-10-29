@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.56.0",
-    "noblox.js": "^6.2.0"
+    "noblox.js": "^6.2.0",
+    "express": "^5.1.0",
+    "serverless-http": "^4.0.0"
   }
 }
