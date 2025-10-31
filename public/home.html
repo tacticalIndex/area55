@@ -40,8 +40,23 @@
         </section>
     </div>
     <script>
+        fetch('download-home.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // Get the response body as plain text
+            })
+            .then(htmlContent => {
+                console.log(htmlContent); // The full HTML content of the file
+                // You can now manipulate this htmlContent string, e.g., insert it into an element
+                // document.getElementById('myDiv').innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
         document.getElementById('downloadButton').addEventListener('click', function() {
-        const htmlContent = 'download-home.html';
         const blob = new Blob([htmlContent], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
