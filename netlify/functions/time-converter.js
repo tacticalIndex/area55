@@ -1,13 +1,8 @@
 const express = require('express');
-const serverless = require('serverless-http');
-
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Use a router so we can mount the same routes both at root (local) and
-// under the Netlify function prefix (/.netlify/functions/<name>).
-const router = express.Router();
-
-router.get('/convert', (req, res) => {
+app.get('/convert', (req, res) => {
   const decimal = parseFloat(req.query.decimal);
   if (isNaN(decimal)) {
     return res.status(400).json({ error: 'Invalid decimal value' });
@@ -36,7 +31,7 @@ router.get('/convert', (req, res) => {
   });
 });
 
-router.get('/to-unix', (req, res) => {
+app.get('/to-unix', (req, res) => {
   const iso = req.query.iso;
   if (!iso) {
     return res.status(400).json({ error: 'Missing ISO input (e.g. ?iso=2025-05-27T14:00:00Z)' });
@@ -77,7 +72,7 @@ function adjustDate(date, adjustment, sign = 1) {
   return new Date(date.getTime() + sign * ms);
 }
 
-router.get('/adjust-time', (req, res) => {
+app.get('/adjust-time', (req, res) => {
   const { time, add, subtract } = req.query;
 
   if (!time) {
@@ -124,14 +119,15 @@ const TIMEZONE_ALIASES = {
   CET: "Europe/Berlin",
   GMT: "Etc/GMT"
 };
-router.get('/timezones', (req, res) => {
+
+app.get('/timezones', (req, res) => {
   res.json({
     aliases: TIMEZONE_ALIASES,
-    note: "You can also use IANA timezones like 'Europe/Berlin' or 'Australia/Sydney'. GMT offsets like 'GMT+5' work too."
+    note: "You can also use IANA timezones like 'Europe/Berlin' or 'Australia/Sydney'. GMT offsets like 'GMT-5' work too."
   });
 });
 
-router.get('/duration', (req, res) => {
+app.get('/duration', (req, res) => {
   const { start, end } = req.query;
 
   if (!start || !end) {
@@ -172,11 +168,6 @@ router.get('/duration', (req, res) => {
   });
 });
 
-// Mount router so the function works both when invoked by Netlify (requests come
-// in at /.netlify/functions/<FUNCTION_NAME>/...) and when testing locally.
-const pathPrefix = process.env.NETLIFY ? `/.netlify/functions/${process.env.FUNCTION_NAME}` : '';
-if (pathPrefix) app.use(pathPrefix, router);
-app.use('/', router);
-
-// Export Netlify-compatible handler
-module.exports.handler = serverless(app);
+app.listen(port, () => {
+  console.log(`API running at http://localhost:${port}`);
+});

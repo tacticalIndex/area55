@@ -11,6 +11,7 @@
         <h1>Area-55 - SCP:RP Site</h1>
         <div class="branding">Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
     </header>
+    <button id="downloadButton">Download Button</button>
     <div class="grid">
         <section class="card">
             <div class="codeblock">
@@ -35,8 +36,24 @@
                 -> ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%<br>
             </div>
             
-            Area-55
+            Area-55 is owned by shadxse
         </section>
     </div>
+    <script>
+    document.getElementById('downloadHtmlButton').addEventListener('click', function() {
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'home.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+    </script>
 </body>
 </html>
