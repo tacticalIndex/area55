@@ -40,15 +40,13 @@
         </section>
     </div>
     <script>
-    document.getElementById('downloadHtmlButton').addEventListener('click', function() {
+        document.getElementById('downloadButton').addEventListener('click', function() {
         const htmlContent = document.documentElement.outerHTML;
         const blob = new Blob([htmlContent], { type: 'text/html' });
-
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'home.html';
+        a.download = 'download-home.html'; // Set the desired filename
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
