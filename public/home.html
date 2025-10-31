@@ -35,8 +35,18 @@
                 -> ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%<br>
             </div>
             
-            Area-55 is owned by <div class="mention" data-userId="PLACEHOLDER">shadxse</div>
+            Area-55 is owned by <div class="mention" data-userId="695297412557963344">shadxse</div>
         </section>
     </div>
+    <script>
+        element = document.querySelectorAll(".mention");
+        userId = element.getAttribute("data-userId");
+
+        element.forEach(mention => {
+            mention.addEventListener("click", () => {
+                window.location.href = `https://discord.com/users/${userId}`;
+            });
+        });
+    </script>
 </body>
 </html>
