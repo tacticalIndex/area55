@@ -11,7 +11,6 @@
         <h1>Area-55 - SCP:RP Site</h1>
         <div class="branding">Created by tactical_index for the SCP: Roleplay custom server Area-55</div>
     </header>
-    <button id="downloadButton">Download Button</button>
     <div class="grid">
         <section class="card">
             <div class="codeblock">
@@ -39,34 +38,5 @@
             Area-55 is owned by shadxse
         </section>
     </div>
-    <script>
-        fetch('download-home.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text(); // Get the response body as plain text
-            })
-            .then(htmlContent => {
-                console.log(htmlContent); // The full HTML content of the file
-                // You can now manipulate this htmlContent string, e.g., insert it into an element
-                // document.getElementById('myDiv').innerHTML = htmlContent;
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-
-        document.getElementById('downloadButton').addEventListener('click', function() {
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'download-home.html'; // Set the desired filename
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
-    </script>
 </body>
 </html>
