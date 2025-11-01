@@ -52,10 +52,7 @@ button:disabled { opacity:.6; cursor:not-allowed; }
     outline-offset: 1.25px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 2px;
-    padding-bottom: 5.75px;
+    padding: 2px 4px 5.75px 4px;
 }
 .mention {
     color: var(--muted);
