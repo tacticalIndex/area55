@@ -3,7 +3,7 @@
     --panel: #121821;
     --panel-2: #0f141b;
     --text: #e6edf3;
-    --muted: #9aa4af;
+    --muted: rgb(154, 164, 175);
     --accent: #9711c8;
     --ok: #2ea043;
     --warn: #e3b341;
@@ -57,6 +57,7 @@ button:disabled { opacity:.6; cursor:not-allowed; }
     padding-top: 2px;
     padding-bottom: 5.75px;
 }
-.mention:hover {
-    cursor: pointer;
+.mention {
+    color: var(--muted);
+    background-color: rgba(170, 180, 170, 0.1);
 }
