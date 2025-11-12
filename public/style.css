@@ -56,9 +56,6 @@ button:disabled { opacity:.6; cursor:not-allowed; }
 }
 .mention {
     color: rgb(160, 186, 249);
-    background-color: rgb(70, 70, 120);
-    text-decoration: none;
     font-weight: 437;
     padding: 2px 4px;
-    border-radius: 6px;
 }

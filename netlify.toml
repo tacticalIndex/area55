@@ -1,0 +1,13 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[[redirects]]
+  from = "/encode-r1"
+  to = "/.netlify/functions/encode-r1-scramble"
+  status = 200
+
+[[redirects]]
+  from = "/decode-r1"
+  to = "/.netlify/functions/decode-r1-scramble"
+  status = 200

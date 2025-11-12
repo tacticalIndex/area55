@@ -8,5 +8,9 @@
         "id": 1162183562519384074,
         "username": "tactical_index",
         "rank": "The Administrator's Assistant"
+    },
+    "actingdepartment": {
+        "serverid": 1338393906374770740,
+        "roleID": 1338444679049379910
     }
 }
