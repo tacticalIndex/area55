@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 // Config
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>?/";
+const ALPHABET = "0123456789!@#$%^&*()_+-=[]{}|;:',.<>?/";
 const BASE = ALPHABET.length;
 const HEADER_SIZE = 2;
 const OFFSET = 987654321n;
