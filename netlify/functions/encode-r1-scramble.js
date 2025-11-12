@@ -57,7 +57,6 @@ function encodeSymbolicFullVarying(num, key = 13579n, totalLength = 24, headerSi
 
   const header = intToBaseFixed(BigInt(dataLen), headerSize);
   const minTotal = headerSize + dataLen;
-  if (totalLength < minTotal) throw new Error(`totalLength too small; must be >= ${minTotal}`);
 
   const padLen = totalLength - minTotal;
   let padding = "";
